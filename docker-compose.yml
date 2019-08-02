@@ -14,7 +14,7 @@ services:
     networks:
       - mynet 
   app:
-    image: app-service-basic-auth:${Build.BuildId}
+    image: krishnaji/nodeapp
     container_name: nodeapp
     restart: always
     environment:
