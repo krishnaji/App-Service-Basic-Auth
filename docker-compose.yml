@@ -1,0 +1,27 @@
+version: '2.1'
+
+services:
+  auth: 
+    image: nginx:latest
+    container_name: production_nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./.htpasswd:/etc/nginx/.htpasswd
+    ports:
+      - 8080:80
+      - 4433:443
+    networks:
+      - mynet 
+  app:
+    image: nodeapp
+    container_name: nodeapp
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
+    networks:
+      - mynet
+ 
+networks:
+    mynet:
